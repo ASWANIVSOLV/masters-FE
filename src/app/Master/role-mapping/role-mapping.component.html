@@ -1,0 +1,58 @@
+<div style="margin-right: 80%;margin-top: 1%; width: 100%;">
+   
+    <div>
+        <h1 style="font-size: 23px;font-family: 'Times New Roman', Times, serif;color: blue;margin-left: 20px;">
+            Employee Type Mapping Create Form
+         </h1>
+        <form [formGroup]="rolecreateForm" style="margin-top:30px">
+            <div class="row" >
+                <div class="col-md-3">
+
+                    <mat-form-field style="width: 200px;margin-left: 20px; ">
+                        <mat-label>Employee Name</mat-label>
+                        <input #empInput placeholder="Select Employee" matInput formControlName="employee_id" 
+                            [matAutocomplete]="emp">
+
+                        <mat-autocomplete #emp="matAutocomplete" [displayWith]="displayFnemp" (opened)="autocompleteempScroll()">
+                            <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+                            <ng-container *ngIf="!isLoading">
+                                <mat-option *ngFor="let emp of employeeList" [value]="emp">{{emp.full_name}}
+                                </mat-option>
+                                
+                            </ng-container>
+                        </mat-autocomplete>
+                    </mat-form-field>   
+            </div>
+                <div class="col-md-3">
+                    <mat-form-field style="width: 250px;" (click)="getgradelist()">
+                        <mat-label>Grade</mat-label>
+                        <input type="text" matInput formControlName="grade"  autocomplete="off" [matAutocomplete]="gradeinfo" (click)="getgradelist()" #gradeInput>
+                        <mat-autocomplete #gradeinfo="matAutocomplete" [displayWith]="getgradeinterface" (opened)="autocompleteGrade()" >
+                            <mat-option *ngIf="isLoading">Loading..</mat-option>
+                            <ng-container *ngIf="!isLoading">
+                                <mat-option *ngFor="let d of gradelist" [value]="d">{{d.name}}</mat-option>
+                            </ng-container>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3">
+                    <mat-form-field style="width: 250px;" (click)="getrolelist_role()">
+                        <mat-label>Role</mat-label>
+                        <input type="text" matInput formControlName="role" required autocomplete="off" [matAutocomplete]="roleinfo" (click)="getrolelist_role()" #roleinput>
+                        <mat-autocomplete #roleinfo="matAutocomplete" [displayWith]="getroleinterface" (opened)="autocompleteRole()" >
+                            <mat-option *ngIf="isLoading">Loading..</mat-option>
+                            <ng-container *ngIf="!isLoading">
+                                <mat-option *ngFor="let d of rolelist" [value]="d">{{d.name}}</mat-option>
+                            </ng-container>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+
+            <button type="button" (click)="emptypevalue()" class="btn btn-outline-success" style="border-radius: 40px;margin-left:20px;width:79px;height:38px">Submit</button>
+            <button type="button" (click)="cancelform()" class="btn btn-outline-success" style="border-radius: 40px;margin-left:20px;width:79px;height:38px">Cancel</button>
+
+
+        </div>    
+        </form>
+    </div>
+</div>        

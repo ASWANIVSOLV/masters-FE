@@ -1,0 +1,222 @@
+<div style="margin-left: 15px;margin-right: 80%;margin-top: 1%; width: 100%;">
+   
+    <div>
+        <h1 style="font-size: 23px;font-family: 'Times New Roman', Times, serif;color: blue;">
+            Employee Entity Summary
+         </h1>
+        <form [formGroup]="employeeentmapsearch">
+            <table>
+                <tr> 
+                    <td>
+                        <mat-form-field  style="width: 250px;font-family: Montserrat;">
+                            <mat-label>Choose Entity</mat-label>
+                            <mat-select formControlName="entity_id">
+                                <mat-option *ngFor="let list of entityList" (click)="select_entityName()" [value]="list.id">{{list.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <mat-form-field style="width: 200px;margin-left: 20px; ">
+                            <mat-label>Employee Name</mat-label>
+                            <input #empInput placeholder="Select Employee" matInput formControlName="employee_id" 
+                                [matAutocomplete]="emp">
+    
+                            <mat-autocomplete #emp="matAutocomplete" [displayWith]="displayFnemp" (opened)="autocompleteempScroll()">
+                                <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+                                <ng-container *ngIf="!isLoading">
+                                    <mat-option *ngFor="let emp of employeeList" [value]="emp">{{emp.full_name}}
+                                    </mat-option>
+                                    
+                                </ng-container>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </td>
+                    <td>
+                        <div style="margin-bottom: 5%; margin-left: 50px;">
+                            <button type="submit" style="border-radius: 40px;margin-left: 10px;" (click)="search()" class="btn btn-outline-primary" ><i class="fa fa-search" aria-hidden="true"></i></button>
+                            <button type="button" (click)="onCancelClick()" class="btn btn-outline-primary"
+                                style="border-radius: 40px;margin-left: 10px;">Clear</button>
+                                <button type="button" class="btn btn-outline-success"  data-bs-toggle="modal" data-bs-target="#entry" (click)="Addempcommap()"
+                                style="border-radius: 20px;margin-left: 20px;margin-top: 10px;margin-bottom: 5px;cursor: pointer ;" color="primary"><span
+                                class="fa fa-plus"></span>Add</button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        
+    </div>
+    <!-- <div class="modal" tabindex="-1" role="dialog" id="entry">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Add Employee</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                                
+                    <form [formGroup]="employeeentmap">
+                        <table>
+                            <tr> 
+                            
+                                <td>
+                                    <mat-form-field appearance="fill" style="width: 250px;font-family: Montserrat;">
+                                        <mat-label>Choose Entity</mat-label>
+                                        <mat-select formControlName="entity_id">
+                                            <mat-option *ngFor="let list of entityList" (click)="select_entityName(list)" [value]="list.id">{{list.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-form-field style="width: 200px;margin-left: 20px; ">
+                                        <mat-label>Employee Name</mat-label>
+                                        <input #empInput placeholder="Select Employee" matInput formControlName="employee_id" (keypress)="kyenbdata($event)"
+                                            [matAutocomplete]="emp">
+                
+                                        <mat-autocomplete #emp="matAutocomplete" [displayWith]="displayFnemp" (opened)="autocompleteempScroll()">
+                                            <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+                                            <ng-container *ngIf="!isLoading">
+                                                <mat-option *ngFor="let emp of employeeList" [value]="emp">{{emp.full_name}}
+                                                </mat-option>
+                                                
+                                            </ng-container>
+                                        </mat-autocomplete>
+                                    </mat-form-field>
+                                </td>
+                                 <td>
+                                    <div style="margin-bottom: 5%; margin-left: 50px;">
+                                        <button type="submit" style="border-radius: 40px;margin-left: 10px;" (click)="employeeentmapSubmit()"  [disabled]="employeeent" class="btn btn-outline-primary" >Submit</button>
+                                        <button type="button" (click)="onCancelClick()" class="btn btn-outline-primary"
+                                            style="border-radius: 40px;margin-left: 10px;">Cancel</button>
+                                    </div>
+                                </td> -->
+                            <!-- </tr>
+                        </table>
+                    </form>
+                    
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" style="border-radius: 40px;margin-left: 10px;" (click)="employeeentmapSubmit()"  [disabled]="employeeent" class="btn btn-outline-primary" >Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>  -->
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabels" aria-hidden="true"
+        id="entry">
+        <div class="modal-dialog modal-xl" style="width:60%;height:100%;">
+            <div class="modal-content">
+                <div class="modal-header" style="background:#ddefdd;color:rgb(31, 29, 29);text-align:center">
+                    <h2 class="modal-title" style="text-align:center;margin-left:42%">Employee Add</h2>
+                    <button class="btn-close" type="button" data-bs-dismiss="modal"></button>
+                </div>
+                                <div>
+                                
+                                    <form [formGroup]="employeeentmap">
+                                        <div class=" row col-md-12" style="margin-bottom: 30px;
+                                        margin-top: 30px;">
+                                            <div class="col-md-5" style="margin-left: 20px;">
+                                                
+                                                    <mat-form-field  style="width: 250px;font-family: Montserrat;">
+                                                        <mat-label>Choose Entity</mat-label>
+                                                        <mat-select formControlName="entity_id">
+                                                            <mat-option *ngFor="let list of entityList" (click)="select_entityName()" [value]="list.id">{{list.name}}
+                                                            </mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                            </div> 
+                                            <div class="col-md-5">
+                                                    <mat-form-field style="width: 200px;margin-left: 20px; ">
+                                                        <mat-label>Employee Name</mat-label>
+                                                        <input #empInputt placeholder="Select Employee" matInput formControlName="employee_id" 
+                                                            [matAutocomplete]="emp">
+                                
+                                                        <mat-autocomplete #emp="matAutocomplete" [displayWith]="displayFnemp" (opened)="autocompleteempScroll()">
+                                                            <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+                                                            <ng-container *ngIf="!isLoading">
+                                                                <mat-option *ngFor="let emp of employeeList" [value]="emp">{{emp.full_name}}
+                                                                </mat-option>
+                                                                
+                                                            </ng-container>
+                                                        </mat-autocomplete>
+                                                    </mat-form-field>
+                                            </div>
+                                                
+                                                <!-- <td>
+                                                    <div style="margin-bottom: 5%; margin-left: 50px;">
+                                                        <button type="submit" style="border-radius: 40px;margin-left: 10px;" (click)="employeeentmapSubmit()"  [disabled]="employeeent" class="btn btn-outline-primary" >Submit</button>
+                                                        <button type="button" (click)="onCancelClick()" class="btn btn-outline-primary"
+                                                            style="border-radius: 40px;margin-left: 10px;">Cancel</button>
+                                                    </div>
+                                                </td> -->
+                                      </div>
+                                        <div>
+                                           
+                                            <button type="submit" style="border-radius: 40px;margin-left: 40%;margin-bottom: 30px;" data-dismiss="modal" (click)="employeeentmapSubmit()"  [disabled]="employeeentmap.invalid" class="btn btn-outline-primary" >Submit</button>
+                                            <button type="button" (click)="onCancelClickk()" class="btn btn-outline-primary"
+                                            style="border-radius: 40px;margin-left: 10px;margin-bottom: 30px;" data-dismiss="modal" >Close</button>
+                                        </div>   
+                                    </form>
+                                    
+                                </div>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive" style="margin-top: 2%;width: 70%; overflow-x: hidden;">
+        <table class="table table-bordered">
+            <thead class="table-success">
+                <tr>
+                    <th>S.No</th>
+                    <th>Name</th>
+                    <th>Entity </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let del of employeeentmapdata; index as i" >
+                    <td>{{i+1}}  </td>
+                    <td>{{del.employee_code}}</td>
+                    <td>{{del.name}}</td>
+                    <td class="cursor">
+                        <div *ngIf="del?.status === true ; else lock">
+                            <mat-icon (click)="forInactivedel(del)" style="color: green;" title="Click to Inactive"
+                                aria-label="inactive">wb_sunny</mat-icon>
+                        </div>
+                        <ng-template #lock>
+                            <mat-icon (click)="foractivedel(del)" style="color: rgb(196, 188, 189);" title="Click to Active"
+                                aria-label="inactive">wb_sunny</mat-icon>
+                        </ng-template>
+                    </td>
+                  
+                </tr>
+            </tbody>
+        </table>
+        <div *ngIf="employeeentmapdata?.length==0; else paginationcom" class="NodataAlign">No Records Found...</div>
+        <ng-template #paginationcom>
+            <div class="cursor" style="font-size: small;text-align:right; margin-bottom:100px;">
+                <button mat-icon-button [disabled]="has_previous === false" color="primary"
+                    (click)="previousClickdel()">
+                    <mat-icon>arrow_back
+                    </mat-icon>
+                </button>
+                {{currentpage}}
+                <button mat-icon-button [disabled]="has_next === false" color="primary" (click)="nextClickdel()">
+                    <mat-icon>arrow_forward
+                    </mat-icon>
+                </button>
+            </div>
+        </ng-template>
+    </div>
+</div>
+<!-- <pre>
+    {{ commodityForm.value | json }}
+</pre> -->
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="default" type="line-scale-party">
+    <p style="color: white">Please Wait. </p>
+</ngx-spinner>

@@ -1,0 +1,66 @@
+<body>
+    <section class="home-sec">
+       <div class="home-div">
+         <div class="home-content text-center">
+           <div class="home-contentTxt mb-4">
+             <h2 class="display-6" style="color: mediumblue;font-family: cursive;margin-top: 25px;">
+               <!-- Welcome To <br> -->
+               Welcome To Wisefin Retail
+             </h2>
+
+             
+           </div>
+
+         </div>
+       </div>
+       <div class="overlay"></div>
+       <button #showcomp class="button-name"  data-bs-toggle="modal" data-bs-target="#change" style="width: 300px;display: none;">dialogue in</button>
+
+     </section>
+     
+ </body>
+
+ <div class="modal" tabindex="-1" data-bs-backdrop="static" data-keyboard="false" role="dialog" id="change" style="margin-top: 40px;">
+        <div class="modal-dialog" role="document" style="width: 450px;">
+          <div class="modal-content">
+            <div class="modal-header" style="background-color: #DDEFDD;">
+              <mat-icon style="margin-left: 28%;color: orange; margin-bottom: 14px;">warning</mat-icon><h5 class="modal-title" style="font-size: larger;color: #ff4500;font-family:cursive">Change Password</h5>
+
+            </div>
+            <div class="modal-body">
+              <div class="container-fluid zindexclass">
+                <form [formGroup]="changeForm" class="singnup-container"  style="margin-left: 48px;">
+                <mat-form-field id="mediumInput" appearance="outline" style="width: 300px;">
+                  <mat-label>Entity</mat-label>
+                  <input type="text" matInput formControlName="entity" readonly>
+                    </mat-form-field>
+                 <mat-form-field appearance="outline" style="width: 300px;">
+                    <mat-label>User Code</mat-label>
+                          <input matInput type="text"  formControlName="setusername" readonly>
+                  </mat-form-field> 
+                  <mat-form-field appearance="outline" style="width: 300px;">
+                    <mat-label>New Password</mat-label>
+                          <input matInput [maxlength]="20" (keypress)="onKeyPress($event)" type="text"  (focusout)="onInputFocusOut()" 
+                             formControlName="newPassword" (paste)="onpaste($event)">
+                          <mat-error *ngIf="restrict_error">Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.</mat-error>
+                  </mat-form-field> 
+                  
+                  <mat-form-field appearance="outline" style="width: 300px;">
+                    <mat-label>Confirm Password</mat-label>
+                          <input matInput [maxlength]="20" (keypress)="onKeyPress($event)" type="{{ showPassword ? 'text' : 'password' }}" [readOnly]="!restrict" 
+                             formControlName="confirmPassword" (paste)="onpaste($event)">
+                  </mat-form-field>
+                  <div>
+                    <span>Show Password</span>
+                    <mat-checkbox (change)="onCheckboxChange()" style="margin-left: 2px;" [checked]="isChecked"></mat-checkbox>
+                </div>
+                  <div class=" form-label-group row">
+                      <button class=" button-name" (click)="change_pass()" style="margin-left: 10px;">Change Password</button>
+                      <button class="button-name "  style="margin-left: 5px;" (click)="backlogin()" >Back</button>
+                    </div>
+                </form>
+            </div>                  
+          </div>
+          </div>
+        </div>
+  </div>    

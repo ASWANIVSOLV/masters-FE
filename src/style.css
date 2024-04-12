@@ -1,0 +1,19 @@
+.mat-form-field-underline{
+    background-color:lightgrey !important;
+  }
+
+.custom-tooltip{
+  min-width: fit-content;
+  background-color: #01A85A!important;
+  color:white !important;
+  min-height: fit-content;
+  font-family:"Montserrat";
+  font-size: 16px;
+}
+.custom-tooltipnew{
+  min-width: fit-content;
+  color:white !important;
+  min-height: fit-content;
+  font-family:"Montserrat";
+  font-size: 16px;
+}

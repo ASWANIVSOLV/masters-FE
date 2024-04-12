@@ -1,0 +1,106 @@
+<section class="vh-100">
+  <div class="container-fluid zindexclass">
+    <div class="row">
+
+      <div class="col-sm-8 px-0 d-none d-sm-block">
+        <img src="./assets/wisefin.png" alt="Login image" class="w-100 vh-100"
+          style="object-fit: cover; object-position: left;">
+      </div>
+
+      <div class="col-sm-3 text-black">
+
+        <div class="marginset" *ngIf="!mobile_flag">
+          <div>
+            <h2>Login</h2>
+          </div>
+
+          <form [formGroup]="loginForm" class="login-container" (ngSubmit)="login()">
+            <div>
+              <!-- <mat-label>Choose Entity</mat-label><br> -->
+              <mat-form-field id="mediumInput" appearance="outline" style="width: 300px;">
+                <mat-select formControlName="entity" [placeholder]="'Entity'">
+                  <mat-option *ngFor="let list of entityList" [value]="list.id">{{list.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div> 
+              <!-- <mat-label>User Code</mat-label><br> -->
+              <mat-form-field id="mediumInput" appearance="outline" style="width: 300px;">
+                  <input matInput placeholder="User Code" formControlName="username">
+                  @if(lock==1){
+                    <mat-icon matSuffix style="color: #f1b646">lock</mat-icon>
+                  }
+               </mat-form-field>
+            </div>
+            <div > 
+              <!-- <mat-label>Password</mat-label><br> -->
+              <mat-form-field id="mediumInput" appearance="outline" style="width: 300px;">
+                <input matInput type="password" [maxLength]="20" placeholder="Password" formControlName="password" (paste)="onpaste($event)">
+                <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+              </mat-form-field>
+
+            </div>
+            <!-- @if(lock==1){ -->
+              <!-- <span *ngIf="isVisible" style="color: orangered; font-size: small; margin-bottom: 10px;">
+                User Account is Locked. Try contacting Admin to Unlock.
+              </span>    -->
+                      <!-- } -->
+            <br>
+            <p><span style="color: blue;" (click)="forgetpass()">Forget Password?</span></p>
+            <button class="button-name" style="width: 300px;" [disabled]="logbool"> Login in</button>
+
+           </form>
+           <!-- <button #showcomp class="button-name" style="width: 300px;display: none;" (click)="openDialog()"> dialogue in</button> -->
+
+        </div> 
+        <div *ngIf="forgetpas">
+          <!-- <span class="close" style="  font-size: 45px;font-weight: 600;"">&times;</span> -->
+          <h2>Reset Password</h2>
+          <form [formGroup]="resetForm" class="singnup-container" >
+            <mat-form-field appearance="outline" style="width: 300px;">
+              <mat-label>Mobile</mat-label>
+                    <input matInput pattern="[1-9]{1}[0-9]{9-11}"
+                    [maxlength]="10" type="number" formControlName="mobile_num">
+            </mat-form-field> 
+
+            <!-- <mat-form-field  appearance="outline" style="width: 300px;">
+              <mat-select formControlName="resetentity" [placeholder]="'Entity'">
+                <mat-option *ngFor="let list of entityList" [value]="list.id">{{list.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field> -->
+
+            <mat-form-field appearance="outline" style="width: 300px;">
+              <mat-label>User Code</mat-label>
+                    <input matInput type="text"  formControlName="setusername">
+            </mat-form-field> 
+            <mat-form-field appearance="outline" style="width: 300px;">
+              <mat-label>Set Password</mat-label>
+                    <input matInput [maxlength]="20" (keypress)="onKeyPress($event)" type="text"  (focusout)="onInputFocusOut()" 
+                       formControlName="newPassword" (paste)="onpaste($event)">
+                    <mat-error *ngIf="restrict_error">Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.</mat-error>
+            </mat-form-field> 
+            
+            <mat-form-field appearance="outline" style="width: 300px;">
+              <mat-label>Confirm Password</mat-label>
+                    <input matInput [maxlength]="20" (keypress)="onKeyPress($event)" type="{{ showPassword ? 'text' : 'password' }}" [readOnly]="!restrict" 
+                       formControlName="confirmPassword" (paste)="onpaste($event)">
+            </mat-form-field>
+            <div>
+              <span>Show Password</span>
+              <mat-checkbox (change)="onCheckboxChange()" style="margin-left: 2px;" [checked]="isChecked"></mat-checkbox>
+          </div>
+            <div class=" form-label-group row" style="margin-left: 3px;">
+                <button class=" button-name" (click)="update_pass()">Reset Password</button>
+                <button class="button-name "   (click)="backloginform()" >Back</button>
+              </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
